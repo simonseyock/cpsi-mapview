@@ -52,7 +52,7 @@ Ext.define('CpsiMapview.controller.MapController', {
         btn.tooltipStr = tTipStr;
         btn.on('toggle', function (_, pressed) {
             var map = BasiGX.util.Map.getMapComponent().map;
-            map.set('defaultClickEnabled', !pressed);
+            CpsiMapview.util.Map.toggleDefaultClickEnabled(map, !pressed);
         });
     },
 });

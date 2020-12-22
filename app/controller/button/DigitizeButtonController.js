@@ -193,16 +193,13 @@ Ext.define('CpsiMapview.controller.button.DigitizeButtonController', {
                 me.deleteInteraction.setActive(true);
             }
             me.map.getViewport().addEventListener('contextmenu', me.contextHandler);
-            // if another digitize button is pressed then this would come before the onToggle of the other button
-            setTimeout(function () {
-                me.map.set('defaultClickEnabled', false);
-            }, 0);
+            CpsiMapview.util.Map.toggleDefaultClickEnabled(me.map, false);
         } else {
             // only reset the defaultClickEnabled on the map if the tool
             // was already active - as this function is called in onBeforeDestroy
             // this is not always the case
             if (me.drawInteraction.getActive() === true) {
-                me.map.set('defaultClickEnabled', true);
+                CpsiMapview.util.Map.toggleDefaultClickEnabled(me.map, true);
             }
 
             me.drawInteraction.setActive(false);

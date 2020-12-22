@@ -138,11 +138,7 @@ Ext.define('CpsiMapview.controller.button.SpatialQueryButtonController', {
         }
         if (pressed) {
 
-            // disable any other map tools - as this can be in a segmentedbutton which switches
-            // between tools add a 100ms timeout to ensure defaultClickEnabled is set to false (race condition)
-            setTimeout(function () {
-                me.map.set('defaultClickEnabled', false);
-            }, 100);
+            CpsiMapview.util.Map.toggleDefaultClickEnabled(me.map, false);
 
             me.drawQueryInteraction.setActive(true);
             if (view.displayPermanently) {
@@ -156,7 +152,7 @@ Ext.define('CpsiMapview.controller.button.SpatialQueryButtonController', {
         } else {
             // re-enable any other map tools if this tool was active
             if (me.drawQueryInteraction.getActive() === true) {
-                me.map.set('defaultClickEnabled', true);
+                CpsiMapview.util.Map.toggleDefaultClickEnabled(me.map, true);
             }
 
             me.drawQueryInteraction.setActive(false);

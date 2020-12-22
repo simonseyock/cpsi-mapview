@@ -141,19 +141,15 @@ Ext.define('CpsiMapview.controller.button.StreetViewTool', {
                 // add layer and raise layer to top of stack
                 overlayLayers.insertAt(overlayLayers.getLength(), me.vectorLayer);
             }
-            // disable any other map tools
-            setTimeout(function () {
-                me.map.set('defaultClickEnabled', false);
-            }, 100);
+            // disable default map tools
+            CpsiMapview.util.Map.toggleDefaultClickEnabled(me.map, false);
         } else {
             if (overlayLayers) {
                 if (overlayLayers.remove(me.vectorLayer)) {
                     // re-enable any other map tools if the tool had been activated
                     // we can check this as me.vectorLayer will have been added and remove
                     // returns a layer when found
-                    setTimeout(function () {
-                        me.map.set('defaultClickEnabled', true);
-                    }, 0);
+                    CpsiMapview.util.Map.toggleDefaultClickEnabled(me.map, true);
                 }
             }
 
